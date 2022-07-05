@@ -29,7 +29,7 @@ router
     });
 
 router
-    .get("/getByAuthor", async (req, res) => {
+    .post("/getByAuthor", async (req, res) => {
         try {
             const post = await Post.getByAuthor(req.body.authorId);
             res.send(post);

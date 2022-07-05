@@ -2,26 +2,35 @@ import './App.css';
 import LoginForm from './components/login';
 import NavBar from './components/NavBar.js';
 import RegisterForm from './components/register';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Profile from './components/profile';
 const navLinks = [
   {
     text: "Profile",
-    url: "#"
+    url: "/profile"
   },
   {
     text: "Login",
-    url: "#loginForm"
+    url: "/login"
   },
   {
     text: "Register",
-    url: "#registerForm"
+    url: "/register"
   }
 ];
 function App() {
   return (
     <div className="App h-100" >
-      <NavBar navLinks={navLinks} />
-      <LoginForm></LoginForm>
-      <RegisterForm></RegisterForm>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<NavBar navLinks={navLinks} />}>
+            <Route index element={<LoginForm ></LoginForm>} />
+            <Route path="login" element={<LoginForm ></LoginForm>} />
+            <Route path="register" element={<RegisterForm />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -37,3 +37,11 @@
     transform: rotate(360deg);
   }
 }
+
+.mt-80 {
+  margin-top: 80px;
+}
+
+.max-width {
+  max-width: 50%;
+}

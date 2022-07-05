@@ -55,7 +55,7 @@ async function deletePost(id) {
 
 //Other common operations
 async function getByAuthor(authorId) {
-    return await Post.find({ "author": authorId });
+    return await Post.find({ "author": authorId }).sort({ postedDate: -1 });
 }
 
 //Export public methods
