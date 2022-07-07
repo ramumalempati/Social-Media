@@ -55,7 +55,21 @@ function Profile() {
                 })
         }
     }
-
+    function deletePost(postId) {
+        console.log(postId);
+        fetchData(
+            "/post/delete",
+            {
+                postId: postId,
+            },
+            "DELETE")
+            .then((data) => {
+                fetchPosts();
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
     return (
         <div id="profile" className="container h-100 d-flex justify-content-center">
             <div className="container w-50 mt-80">
@@ -67,10 +81,12 @@ function Profile() {
                     posts.map((post) => {
                         return (
                             <div className="card mb-3" key={post._id}>
+                                <i className="bi bi-trash"></i>
                                 <blockquote className="blockquote mb-0">
                                     <p>{post.description}</p>
                                     <p className="card-text"><small className="text-muted">{Moment(post.postedDate).format("MMM Do YYYY, h:mm a")}</small></p>
                                 </blockquote>
+                                <button type="button" onClick={() => deletePost(post._id)} className="btn btn-danger">Delete</button>
                             </div>
                         )
                     })
