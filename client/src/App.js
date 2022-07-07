@@ -4,6 +4,8 @@ import NavBar from './components/NavBar.js';
 import RegisterForm from './components/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from './components/profile';
+import { UserProvider } from './context/userContext';
+
 const navLinks = [
   {
     text: "Profile",
@@ -21,6 +23,7 @@ const navLinks = [
 function App() {
   return (
     <div className="App h-100" >
+      <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<NavBar navLinks={navLinks} />}>
@@ -31,6 +34,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

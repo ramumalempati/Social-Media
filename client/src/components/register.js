@@ -2,19 +2,17 @@ import { fetchData } from "../main.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import UserContext from "../context/userContext.js";
 
 function RegisterForm() {
     const nav = useNavigate();
 
-    const [user, setUser] = useState({
-        userName: '',
-        password: '',
-        confirmPassword: ''
-    })
+    const {user, updateUser} = useContext(UserContext);
 
     const { userName, password, confirmPassword } = user;
 
-    const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value })
+    const onChange = (e) => updateUser(e.target.name, e.target.value)
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -28,7 +26,7 @@ function RegisterForm() {
             "POST")
             .then((data) => {
                 if (!data.message) {
-                    console.log(data)
+                    updateUser("authenticated", true)
                     localStorage.setItem('currentLoggedInUserId', data._id);
                     nav("/profile")
                 }
